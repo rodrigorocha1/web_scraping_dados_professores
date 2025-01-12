@@ -12,8 +12,13 @@ site.find_all('tbody')
 
 for dados in site.find_all('tr')[1:]:
     print(dados.find('td').text)
+    print(dados.find('a').get('href'))
+    print(dados.find('td', class_='hidden-phone').text)
     print()
-    print()
+
+
+for dados in site.find_all('tr')[1:]:
+    print(dados.find('td', class_='hidden-phone').text)
 
 site.find_all('tr')[0]
 
