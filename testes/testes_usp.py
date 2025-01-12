@@ -18,7 +18,7 @@ for chave, dados in enumerate(site.find_all('div', class_='elementor-col-66')):
     print('=' * 150)
 
 
-url = 'https://pgbioquimica.fmrp.usp.br/roberto-do-nascimento-silva/'
+url = 'https://pgbioquimica.fmrp.usp.br/maria-eugenia-guazzaroni/'
 
 response = requests.get(url, timeout=10, verify=False)
 html = response.text
@@ -29,6 +29,9 @@ site.find('div', class_='elementor-widget-container').select('a')[0:2]
 
 
 site.find('div', class_='elementor-widget-container').find('li').text
+
+site.find('div', class_='elementor-widget-container').find('a').text
+
 
 ''.join([a.get_text(strip=True) for a in site.find(
     'div', class_='elementor-widget-container').select('a')[0:2]])
