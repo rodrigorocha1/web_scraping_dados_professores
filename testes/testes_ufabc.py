@@ -26,3 +26,14 @@ site.find_all('tr')[1:]
 
 
 site.find_all('tr')[2]
+
+
+url = 'https://www.ufabc.edu.br/ensino/docentes/ademir-pelizari'
+
+response = requests.get(url, timeout=10)
+html = response.text
+site = BeautifulSoup(html, 'html.parser')
+
+email_element = site.find('a', href=lambda x: x and x.startswith('mailto:'))
+
+print(email_element.text)
