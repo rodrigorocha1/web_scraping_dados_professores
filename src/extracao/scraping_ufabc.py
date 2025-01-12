@@ -9,11 +9,24 @@ class ScrapingUFABC(Extracao):
         soup = self.conectar_url()
         for dados in soup.find_all('tr')[1:]:
             url_professor = dados.find('a').get('href')
-            dados_professor = self.conectar_url(url=url_professor)
+            dados_professor = self.conectar_url(
+                url=url_professor) if url_professor else None
+
+            linha_pesquisa = (
+                dados.find('td', class_='hidden-phone').text.strip()
+                if dados.find('td', class_='hidden-phone')
+                else None
+            )
+
+            email = (
+                dados_professor.find(
+                    'a', href=lambda x: x and x.startswith('mailto:')).text.strip()
+                if dados_professor and dados_professor.find('a', href=lambda x: x and x.startswith('mailto:'))
+                else None
+            )
             yield {
                 'professor': dados.find('td').text.strip(),
-                'linha_pesquisa': dados.find('td', class_='hidden-phone').text,
-                'email': dados_professor.find('a', href=lambda x: x and x.startswith('mailto:')).text,
-                'orgao': 'UFABC'
+                'linha_pesquisa': linha_pesquisa,
+                'email': email
 
             }

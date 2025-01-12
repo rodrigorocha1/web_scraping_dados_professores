@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Optional, Generator, Dict
 
 
 class Iextracao(ABC):
@@ -9,5 +9,5 @@ class Iextracao(ABC):
         pass
 
     @abstractmethod
-    def obter_dados(self):
+    def obter_dados(self) -> Generator[Dict[str, str], None, None]:
         pass

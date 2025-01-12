@@ -3,6 +3,7 @@ import requests
 from typing import Optional
 from bs4 import BeautifulSoup
 from abc import abstractmethod
+from typing import Generator, Dict
 
 
 class Extracao(Iextracao):
@@ -19,5 +20,5 @@ class Extracao(Iextracao):
         return site
 
     @abstractmethod
-    def obter_dados(self):
+    def obter_dados(self) -> Generator[Dict[str, str], None, None]:
         pass
