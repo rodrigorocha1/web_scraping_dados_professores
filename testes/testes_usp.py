@@ -30,7 +30,7 @@ site.find('div', class_='elementor-widget-container').select('a')[0:2]
 
 site.find('div', class_='elementor-widget-container').find('li').text
 
-site.find('div', class_='elementor-widget-container').find('a').text
+site.find('div', class_='elementor-widget-container').find('li').text
 
 
 ''.join([a.get_text(strip=True) for a in site.find(
