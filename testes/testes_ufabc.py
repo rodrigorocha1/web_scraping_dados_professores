@@ -7,6 +7,8 @@ url = 'https://www.ufabc.edu.br/ensino/docentes'
 response = requests.get(url, timeout=10)
 html = response.text
 site = BeautifulSoup(html, 'html.parser')
+
+type(site)
 site.title.text
 site.find_all('tbody')
 

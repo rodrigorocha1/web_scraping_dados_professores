@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 
-class Iscraper(ABC):
+class Iextracao(ABC):
 
     @abstractmethod
-    def conectar_url(self):
+    def conectar_url(self, url: Optional[str]):
         pass
 
     @abstractmethod
