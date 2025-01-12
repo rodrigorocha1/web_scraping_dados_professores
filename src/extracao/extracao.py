@@ -10,7 +10,8 @@ class Extracao(Iextracao):
     def __init__(self, url: str):
         self.__url = url
 
-    def conectar_url(self, url: Optional[str]) -> BeautifulSoup:
+    def conectar_url(self, url: Optional[str] = None) -> BeautifulSoup:
+        url = self.__url if url is None else url
         response = requests.get(url, timeout=10, verify=False)
         html = response.text
         site = BeautifulSoup(html, 'html.parser')
