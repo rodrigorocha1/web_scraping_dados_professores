@@ -1,5 +1,5 @@
 from src.extracao.extracao import Extracao
-from typing import Generator, Dict, Optional
+from typing import Generator, Dict
 from bs4 import Tag
 
 
@@ -25,8 +25,9 @@ class ScrapingUSP(Extracao):
             nome_tag = site.find('h2', class_='elementor-heading-title')
             nome = 'Não informado'
             if nome_tag and isinstance(nome_tag, Tag):
-                nome = nome_tag.get_text(strip=True).split(
-                    ',')[0] if nome_tag.get_text(strip=True) else 'Não informado'
+                nome_text = nome_tag.get_text(strip=True)
+                if nome_text:
+                    nome = nome_text.split(',')[0]
 
             email_tag = site.find('div', class_='elementor-widget-container')
             email = ''
@@ -35,7 +36,17 @@ class ScrapingUSP(Extracao):
                 if email_a_tag and email_a_tag.text:
                     email = email_a_tag.text.strip()
 
+            linha_de_pesquisa_tag = site.find(
+                'div', class_='elementor-widget-container')
+            linha_de_pesquisa = ''
+            if linha_de_pesquisa_tag and isinstance(linha_de_pesquisa_tag, Tag):
+                linha_de_pesquisa_div_tag = linha_de_pesquisa_tag.find('li')
+                if linha_de_pesquisa_div_tag and isinstance(linha_de_pesquisa_div_tag, Tag) and linha_de_pesquisa_div_tag.text:
+                    linha_de_pesquisa = linha_de_pesquisa_div_tag.text.strip()
+
             yield {
                 'professor': nome,
-                'email': email
+                'email': email,
+                'linha_de_pesquisa': linha_de_pesquisa,
+                'universidade': 'USP'
             }
