@@ -1,7 +1,10 @@
-from src.extracao.scraping_ufabc import ScrapingUFABC
+from src.extracao.scraping_usp import ScrapingUSP
 
-scraping_ufpABC = ScrapingUFABC()
+scraping_usp = ScrapingUSP()
 
 
-for dados in scraping_ufpABC.obter_dados():
+for dados in scraping_usp.obter_dados():
     print(dados)
+
+
+# scraping_usp.obter_dados()

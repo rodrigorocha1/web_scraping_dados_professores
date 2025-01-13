@@ -1,3 +1,4 @@
+from typing import Dict, Generator
 from src.extracao.extracao import Extracao
 
 
@@ -5,7 +6,7 @@ class ScrapingUFABC(Extracao):
     def __init__(self):
         super().__init__(url='https://www.ufabc.edu.br/ensino/docentes')
 
-    def obter_dados(self):
+    def obter_dados(self) -> Generator[Dict[str, str], None, None]:
         soup = self.conectar_url()
         for dados in soup.find_all('tr')[1:]:
             url_professor = dados.find('a').get('href')

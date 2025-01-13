@@ -23,9 +23,11 @@ url = 'https://pgbioquimica.fmrp.usp.br/maria-eugenia-guazzaroni/'
 response = requests.get(url, timeout=10, verify=False)
 html = response.text
 site = BeautifulSoup(html, 'html.parser')
-site.find('div', class_='elementor-widget-container').select('a').text
+site.find('h2', class_='elementor-heading-title').text
 
 site.find('div', class_='elementor-widget-container').select('a')[0:2]
+
+site.find('div', class_='elementor-widget-container').find('a').text
 
 
 site.find('div', class_='elementor-widget-container').find('li').text
